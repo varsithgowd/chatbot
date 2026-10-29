@@ -1,0 +1,25 @@
+{
+  "name": "supportsense-ai",
+  "version": "1.0.0",
+  "description": "SupportSense AI - Verified Customer Support Knowledge System",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed",
+    "test": "cd server && npm test",
+    "evaluate": "cd server && npm run evaluate",
+    "build:client": "cd client && npm run build",
+    "start": "cd server && node server.js"
+  },
+  "keywords": [
+    "customer-support",
+    "knowledge-base",
+    "grounded-ai",
+    "search-engine",
+    "citations"
+  ],
+  "author": "SupportSense AI Team",
+  "license": "MIT"
+}
+
