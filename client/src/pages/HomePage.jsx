@@ -97,6 +97,13 @@ export default function HomePage() {
     navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
   };
 
+  const scrollToChat = () => {
+    const chatSection = document.getElementById('chat-assistant-section');
+    if (chatSection) {
+      chatSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="space-y-14 pb-16">
       
@@ -127,7 +134,7 @@ export default function HomePage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search approved articles (e.g., password reset, 2FA, refunds, invoice)..."
-                className="w-full px-3 py-2 text-sm sm:text-base text-slate-800 bg-transparent placeholder-slate-400 focus:outline-none"
+                className="w-full px-3 py-2 text-base sm:text-sm text-slate-800 bg-transparent placeholder-slate-400 focus:outline-none"
               />
               <button
                 type="submit"
@@ -137,12 +144,21 @@ export default function HomePage() {
               </button>
             </form>
 
-            {/* Suggested Chips */}
+            {/* Suggested Chips & Explicit Chat Action */}
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+              <button
+                type="button"
+                onClick={scrollToChat}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-xs"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                Chat with Assistant
+              </button>
               <span className="text-xs text-slate-500 font-medium">Popular inquiries:</span>
               {SUGGESTED_CHIPS.map((chip, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => navigate(`/search?q=${encodeURIComponent(chip)}`)}
                   className="text-xs bg-white/90 hover:bg-purple-50 hover:text-purple-700 hover:border-purple-300 text-slate-600 border border-slate-200 rounded-lg px-2.5 py-1 transition-all shadow-2xs"
                 >
@@ -207,7 +223,7 @@ export default function HomePage() {
         </section>
 
         {/* Interactive Chat Assistant Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <section id="chat-assistant-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start scroll-mt-24">
           
           <div className="lg:col-span-4 space-y-5">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-purple-100 text-purple-700 text-xs font-semibold">

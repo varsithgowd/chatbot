@@ -27,10 +27,23 @@ export default function ChatAssistant({ embedded = false }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Avoid any scrolling on initial mount so page does not jump
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    // Scroll only the internal chat container, never the window or outer page
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   }, [messages, loading]);
 
   const handleSend = async (questionText = input) => {
@@ -159,7 +172,7 @@ export default function ChatAssistant({ embedded = false }) {
       </div>
 
       {/* Message History */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -204,8 +217,6 @@ export default function ChatAssistant({ embedded = false }) {
             </div>
           </div>
         )}
-
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Suggested Question Chips */}
@@ -243,7 +254,7 @@ export default function ChatAssistant({ embedded = false }) {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask a question about passwords, tracking, billing, or returns..."
             disabled={loading}
-            className="flex-1 text-sm bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 disabled:opacity-60 transition-all"
+            className="flex-1 text-base sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 disabled:opacity-60 transition-all"
           />
           <button
             type="submit"
