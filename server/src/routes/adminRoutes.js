@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const rateLimit = require('express-rate-limit');
-const { login, getMe } = require('../controllers/authController');
+const { login, getMe, logout } = require('../controllers/authController');
 const {
   getDashboard,
   getAdminArticles,
@@ -39,6 +39,7 @@ router.use(authMiddleware);
 router.use(adminMiddleware);
 
 router.get('/me', getMe);
+router.post('/logout', logout);
 router.get('/dashboard', getDashboard);
 
 // Article management

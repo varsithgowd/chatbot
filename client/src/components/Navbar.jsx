@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { isVerifiedAdmin, logout } = useAuth();
 
   const isActive = (path) => location.pathname === path;
 
@@ -60,7 +60,7 @@ export default function Navbar() {
 
         {/* Admin Navigation Button */}
         <div className="flex items-center gap-3">
-          {user ? (
+          {isVerifiedAdmin ? (
             <div className="flex items-center gap-2">
               <Link
                 to="/admin"

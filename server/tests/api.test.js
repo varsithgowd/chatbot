@@ -244,7 +244,16 @@ test('POST /api/admin/login should authenticate valid admin and reject invalid c
   assert.strictEqual(invalidRes.statusCode, 401);
 });
 
-// 12. Rejection of unauthenticated admin access
+// 12. Admin logout
+test('POST /api/admin/logout should terminate session and return success', async () => {
+  const res = await request(app)
+    .post('/api/admin/logout')
+    .set('Authorization', `Bearer ${adminToken}`);
+  assert.strictEqual(res.statusCode, 200);
+  assert.strictEqual(res.body.success, true);
+});
+
+// 13. Rejection of unauthenticated admin access
 test('Admin endpoints should reject unauthenticated requests with 401', async () => {
   const res = await request(app).get('/api/admin/dashboard');
   assert.strictEqual(res.statusCode, 401);

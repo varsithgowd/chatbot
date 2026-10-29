@@ -64,8 +64,20 @@ async function getMe(req, res, next) {
   }
 }
 
+async function logout(req, res, next) {
+  try {
+    return res.json({
+      success: true,
+      message: 'Admin session terminated successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   login,
-  getMe
+  getMe,
+  logout
 };
 

@@ -51,6 +51,7 @@ export const submitFeedback = (data) => api.post('/feedback', data).then(r => r.
 
 // Admin Auth APIs
 export const adminLogin = (data) => api.post('/admin/login', data).then(r => r.data);
+export const adminLogout = () => api.post('/admin/logout').catch(() => {}).then(r => r?.data);
 export const getAdminMe = () => api.get('/admin/me').then(r => r.data);
 
 // Admin Management APIs
