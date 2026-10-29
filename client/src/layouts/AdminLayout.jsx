@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   FileText,
@@ -33,8 +33,7 @@ export default function AdminLayout() {
 
   // If unauthenticated, redirect to login
   if (!user || user.role !== 'admin') {
-    navigate('/admin/login');
-    return null;
+    return <Navigate to="/admin/login" replace />;
   }
 
   const navItems = [

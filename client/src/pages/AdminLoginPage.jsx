@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
       if (err.response?.data?.error) {
         setError(err.response.data.error);
       } else if (!err.response || err.response.status >= 500) {
-        setError('Cannot connect to backend server. Please ensure the backend is running on port 5000.');
+        setError('Cannot connect to SupportSense backend service. Please verify server connectivity.');
       } else {
         setError('Invalid credentials or non-admin account.');
       }

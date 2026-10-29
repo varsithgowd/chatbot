@@ -1,7 +1,14 @@
 import axios from 'axios';
 
+// Support VITE_API_URL or VITE_API_BASE_URL (e.g. https://chatbot-49bs.onrender.com)
+// Fallback to '/api' for local Vite dev proxy and Vercel rewrites
+const rawApiUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || '';
+const baseURL = rawApiUrl
+  ? (rawApiUrl.endsWith('/api') ? rawApiUrl : `${rawApiUrl.replace(/\/+$/, '')}/api`)
+  : '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json'
   }

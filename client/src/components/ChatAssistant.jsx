@@ -68,7 +68,7 @@ export default function ChatAssistant({ embedded = false }) {
       ]);
     } catch (err) {
       const serverError = err.response?.data?.error;
-      const errorMsg = serverError || 'Cannot reach SupportSense AI backend service. Please ensure the backend is running on port 5000.';
+      const errorMsg = serverError || 'Cannot reach SupportSense AI backend service. Please verify server connectivity or try again in a few moments.';
       setError(errorMsg);
       const errorMsgId = 'bot-error-' + Date.now();
       setMessages(prev => [

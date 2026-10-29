@@ -9,6 +9,7 @@
     "seed": "cd server && npm run seed",
     "test": "cd server && npm test",
     "evaluate": "cd server && npm run evaluate",
+    "build": "cd client && npm run build",
     "build:client": "cd client && npm run build",
     "start": "cd server && node server.js"
   },
